@@ -21,7 +21,11 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs = ["-Xallow-result-return-type"]
     }
-
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -35,4 +39,15 @@ dependencies {
     implementation commonDependencies.koinExt
     implementation commonDependencies.coroutine
 
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.7.1"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.7.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
+    testImplementation "org.mockito:mockito-core:3.12.4"
+    testImplementation "org.mockito:mockito-inline:3.12.4"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.8.0"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "io.mockk:mockk:1.12.0"
 }

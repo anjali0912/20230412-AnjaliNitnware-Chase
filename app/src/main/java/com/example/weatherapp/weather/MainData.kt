@@ -1,10 +1,10 @@
 package com.example.weatherapp.weather
 
-import androidx.lifecycle.MutableLiveData
 import com.example.core.BaseData
+import com.example.domain.model.WeatherModel
 
 data class MainData(
-    val empty: MutableLiveData<String> = MutableLiveData("")
-) : BaseData() {
-
-}
+    val weatherModel: WeatherModel = WeatherModel(),
+    val loadingState: Boolean = false,
+    val errorState: Boolean = false,
+) : BaseData()

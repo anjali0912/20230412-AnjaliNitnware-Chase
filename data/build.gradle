@@ -32,9 +32,6 @@ dependencies {
     implementation commonDependencies.ktx
     implementation commonDependencies.appcompat
     implementation commonDependencies.gson
-    implementation commonDependencies.roomRuntime
-    kapt commonDependencies.roomCompiler
-    implementation commonDependencies.room
     implementation commonDependencies.retrofit
     implementation commonDependencies.gsonConverter
     implementation commonDependencies.interceptor

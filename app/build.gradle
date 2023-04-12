@@ -45,23 +45,14 @@ dependencies {
     implementation commonDependencies.ktx
     implementation commonDependencies.appcompat
     implementation commonDependencies.material
-    implementation commonDependencies.constraintLayout
     implementation commonDependencies.liveData
     implementation commonDependencies.viewModel
-    implementation commonDependencies.navigationFragment
-    implementation commonDependencies.navigationUi
-    implementation commonDependencies.filePicker
     implementation commonDependencies.retrofit
     implementation commonDependencies.gsonConverter
     implementation commonDependencies.interceptor
-    implementation commonDependencies.glide
-    annotationProcessor commonDependencies.glideCompiler
     implementation commonDependencies.koin
     implementation commonDependencies.koinViewmodel
     implementation commonDependencies.koinExt
-    implementation commonDependencies.recyclerView
-    implementation commonDependencies.cardView
-    implementation commonDependencies.locationServices
     implementation commonDependencies.composeUi
     implementation commonDependencies.composeActivity
     implementation commonDependencies.composeMaterial
@@ -69,4 +60,5 @@ dependencies {
     implementation commonDependencies.composeUiTooling
     implementation commonDependencies.composeStateExtension
     implementation commonDependencies.composeJunit4
+    implementation commonDependencies.composeCoil
 }

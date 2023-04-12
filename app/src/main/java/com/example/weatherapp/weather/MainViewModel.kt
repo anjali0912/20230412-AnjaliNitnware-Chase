@@ -5,16 +5,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.core.BaseViewModel
+import com.example.domain.model.WeatherModel
 import com.example.domain.params.WeatherParams
 import com.example.domain.usecase.WeatherUseCase
 import com.example.weatherapp.BuildConfig
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    data: MainData,
     application: Application,
+    data: MainData,
     private val weatherUseCase: WeatherUseCase
-) : BaseViewModel<MainData>(application, data) {
+) : BaseViewModel<MainData, MainEvents>(application, data) {
 
     private var _state = mutableStateOf(MainData())
     val state: State<MainData> = _state
@@ -23,14 +24,39 @@ class MainViewModel(
         getWeather()
     }
 
-    private fun getWeatherParams() = WeatherParams(DEFAULT_CITY_NAME, BuildConfig.APIKEY)
+    private fun getWeatherParams(cityName: String = ""): WeatherParams {
+        val name = cityName.ifEmpty {
+            DEFAULT_CITY_NAME
+        }
+        return WeatherParams(name, BuildConfig.APIKEY)
+    }
 
-    private fun getWeather() {
+    private fun setWeatherModel(model: WeatherModel) {
+        _state.value = state.value.copy(weatherModel = model)
+    }
+
+    private fun setLoadingState(loadingState: Boolean) {
+        _state.value = state.value.copy(loadingState = loadingState)
+    }
+
+    private fun setErrorState(errorState: Boolean) {
+        _state.value = state.value.copy(errorState = errorState)
+    }
+
+    fun getWeather(cityName: String = "") {
+        setLoadingState(true)
+        setErrorState(false)
         viewModelScope.launch {
-            weatherUseCase.execute(getWeatherParams()).mapResult(
+            weatherUseCase.execute(getWeatherParams(cityName)).mapResult(
                 success = { weatherModel ->
+                    setWeatherModel(weatherModel)
+                    setLoadingState(false)
+                    updateEvent(MainEvents.OnSuccess)
                 },
-                failure = { error ->
+                failure = {
+                    setLoadingState(false)
+                    setErrorState(true)
+                    updateEvent(MainEvents.OnFailure)
                 }
             )
         }

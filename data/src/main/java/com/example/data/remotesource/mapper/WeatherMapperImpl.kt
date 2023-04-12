@@ -24,7 +24,6 @@ class WeatherMapperImpl : WeatherMapper {
                 country = this.sys?.country.orEmpty(),
                 sunrise = this.sys?.sunrise.toString().orEmpty(),
                 sunset = this.sys?.sunset.toString().orEmpty(),
-                type = this.sys?.type.toString().orEmpty(),
                 timezone = this.timezone.toString().orEmpty(),
                 visibility = this.visibility.toString().orEmpty(),
                 weather = this.weather?.map {
@@ -35,7 +34,7 @@ class WeatherMapperImpl : WeatherMapper {
                     )
                 } ?: emptyList(),
                 deg = this.wind?.deg.toString().orEmpty(),
-                gust = this.wind?.gust.toString().orEmpty(),
+                gust = this.wind?.gust?.toInt() ?: 0,
                 speed = this.wind?.speed.toString().orEmpty(),
             )
         }

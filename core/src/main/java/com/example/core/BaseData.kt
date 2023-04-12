@@ -1,3 +1,3 @@
 package com.example.core
 
-open class BaseData()
+abstract class BaseData

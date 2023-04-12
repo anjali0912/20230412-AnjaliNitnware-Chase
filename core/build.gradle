@@ -38,5 +38,4 @@ dependencies {
     implementation commonDependencies.koinScope
     implementation commonDependencies.koinViewmodel
     implementation commonDependencies.koinExt
-    implementation commonDependencies.glide
 }
